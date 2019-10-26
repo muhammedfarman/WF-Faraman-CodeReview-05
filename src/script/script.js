@@ -91,7 +91,7 @@ $("#search").on("click",function(){
  
    $("#index").empty();
   output(newArr);
-  console.log("search ",newArr);
+  	console.log("search ",newArr);
 	})
 	
 
