@@ -52,6 +52,7 @@ $("#male").on("click",function(){
 
 	$("#index").empty();
 	output(males);
+	favme();
 	showfav(males);
 
 });
@@ -60,6 +61,7 @@ $("#female").on("click",function(){
 	$("#index").empty();
 	
 	output(females);
+	favme();
 	clearfav()
 	showfav(females);
 
@@ -68,6 +70,7 @@ $("#age").on("click",function(){
 
 	$("#index").empty();
 	output(age);
+	favme();
 	clearfav()
 	showfav(age);
 
@@ -77,6 +80,7 @@ $("#all").on("click",function(){
 	$("#index").empty();
 	
 	output(people);
+	favme();
 	clearfav()
 	showfav(people);
 
@@ -90,9 +94,9 @@ output(result);
 
 console.log("sera " ,result);
 })
+favme();
 
-
-
+function favme(){
 fav=[...people];
 
 $(".fa-heart").click(function () {
@@ -149,4 +153,4 @@ showfav(fav);
 		};}
 	};
 
-})
+});}
