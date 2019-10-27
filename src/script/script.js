@@ -26,7 +26,7 @@ for (let one of people) {
 		               
 						   <img class="card-img-top pt-2" src=${one.img}  alt=${one.name} height="500vh">
 						   
-							  <span class='card-img-overlay fa fa-heart' id=${one.id} value=${one.fav}></span>
+							  <span class='card-img-overlay far fa-heart' id=${one.id} value=${one.fav}></span>
 
 						 <div class="card-body  text-light rounded-bottom text-center">
 						 
@@ -96,16 +96,19 @@ console.log("sera " ,result);
 fav=[...people];
 
 $(".fa-heart").click(function () {
+
 	id = $(this).attr("id");
 	v = $(this).attr("value");
 	console.log(v);
 	if (v == 0) {
 		$(this).attr("value" ,"1");
+		$(this).attr("class","card-img-overlay fa fa-heart")
 		fav[id].fav = 1;
 	}
 	
 	else if (v == 1) {
 		$(this).attr("value" ,"0");
+		$(this).attr("class","card-img-overlay far fa-heart")
 		fav[id].fav = 0;
 		
 		
