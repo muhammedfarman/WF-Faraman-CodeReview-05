@@ -3,26 +3,28 @@ people = [];
 
 people = data;
 console.log(people);
-males= people.filter(d => d.gender === 'm');
+males = people.filter(d => d.gender === 'm');
 console.log('male array', males);
-females= people.filter(d => d.gender === 'f');
+females = people.filter(d => d.gender === 'f');
 console.log('female array', females)
 
-age=[...people];
-age=age.sort(function(a, b){
-    return a.age-b.age
+age = [...people];
+age = age.sort(function (a, b) {
+	return a.age - b.age
 })
 console.log("age sorted", age);
 console.log("people arr", people);
 
 
+function output(people) {
+	$("#sortable").empty();
+	
 
-function output(people){
-	$("#index").empty();
+
+	for (let one of people) {
 	
-for (let one of people) {
-	
-	$("#index").append(`<div class=" col-xl-2 col-lg-3  col-md-4 col-sm-12 bg-dark card mb-4 mr-1 item" >
+
+		$("#sortable").append(`<div class=" col-xl-2 col-lg-3  col-md-4 col-sm-12 bg-dark card mb-4 mr-1 item" >
 		               
 						   <img class="card-img-top pt-2" src=${one.img}  alt=${one.name} height="500vh">
 						   
@@ -36,108 +38,113 @@ for (let one of people) {
 		                     <p class="card-text text-white mb-4">${one.info}</p>
 		                     <!--progress-->
 		                     <div class="progress">
-		                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-		                             aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 90%"></div>
+		                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" id="progress"
+		                             aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: ${one.prog}%"></div>
 		                    </div>
 						</div>`);
-}
+	}
 };
 output(people);
 
-function clearmain(){
-	$("#index").empty();
+function clearmain() {
+	$("#sortable").empty();
 }
 
-$("#male").on("click",function(){
+$("#male").on("click", function () {
 
-	$("#index").empty();
+	$("#sortable").empty();
 	output(males);
 	favme();
 	showfav(males);
 
 });
-$("#female").on("click",function(){
+$("#female").on("click", function () {
 
-	$("#index").empty();
-	
+	$("#sortable").empty();
+
 	output(females);
 	favme();
 	clearfav()
 	showfav(females);
 
 });
-$("#age").on("click",function(){
+$("#age").on("click", function () {
 
-	$("#index").empty();
+	$("#sortable").empty();
 	output(age);
 	favme();
 	clearfav()
 	showfav(age);
 
 });
-$("#all").on("click",function(){
+$("#all").on("click", function () {
 
-	$("#index").empty();
-	
+	$("#sortable").empty();
+
 	output(people);
 	favme();
 	clearfav()
 	showfav(people);
 
 });
-$("#sinput").on("change",function(){$("#index").empty();
-result = [] ;
-input = $("#sinput").val();
-result = people.filter(x => x.name.toLowerCase().startsWith(input.toLowerCase()));
+$("#sinput").on("change", function () {
+	$("#sortable").empty();
+	result = [];
+	input = $("#sinput").val();
+	result = people.filter(x => x.name.toLowerCase().startsWith(input.toLowerCase()));
 
-output(result);
+	output(result);
+	favme();
 
-console.log("sera " ,result);
+	console.log("sera ", result);
 })
 favme();
 
-function favme(){
-fav=[...people];
+function favme() {
+	fav = [...people];
 
-$(".fa-heart").click(function () {
+	$(".fa-heart").click(function () {
 
-	id = $(this).attr("id");
-	v = $(this).attr("value");
-	console.log(v);
-	if (v == 0) {
-		$(this).attr("value" ,"1");
-		$(this).attr("class","card-img-overlay fa fa-heart")
-		fav[id].fav = 1;
-	}
-	
-	else if (v == 1) {
-		$(this).attr("value" ,"0");
-		$(this).attr("class","card-img-overlay far fa-heart")
-		fav[id].fav = 0;
+		id = $(this).attr("id");
+		v = $(this).attr("value");
+		console.log(v);
+		if (v == 0) {
+			$(this).attr("value", "1");
+			$(this).attr("class", "card-img-overlay fa fa-heart")
+			
+			fav[id].fav = 1;
+		}
+
+		else if (v == 1) {
+			$(this).attr("value", "0");
+			$(this).attr("class", "card-img-overlay far fa-heart")
 		
-		
-	}
-	console.log("fav",fav);
-clearfav();
-showfav(fav);
+			fav[id].fav = 0;
 
-	function clearfav() {
-		$("#output").empty();
 
-	}
+		}
+		console.log("fav", fav);
+		clearfav();
+		showfav(fav);
 
-	function showfav() {
+		function clearfav() {
+			$("#output").empty();
 
-		$("#output").empty();
+		}
 
-		for (fa of fav) {if(fa.fav==1){
-			  
-				$("#output").append(`<div class=" col-xl-4 col-lg-4  col-md-4 col-sm-12 bg-dark card mb-4 mr-1 item" >
+		function showfav() {
+
+			$("#output").empty();
+
+			for (fa of fav) {
+				if (fa.fav == 1) {
+
+					$("#output").append(`<div class=" ui-state-default col-xl-4 col-lg-4  col-md-4 col-sm-12 bg-dark card mb-4 mr-1 item " >
 	 <img class="card-img-top pt-2" src=${fa.img}  alt=${fa.name} height="800vh">
 													   
 														  
 							
-	<div class="card-body  text-light rounded-bottom text-center">
+	<div class="card-body  text-light rounded-bottom text-center ui-icon ui-icon-arrowthick-2-n-s">
 													 
 		 <h4 class="card-title">${fa.name}</h4>
 														
@@ -145,12 +152,18 @@ showfav(fav);
 	<p class="card-text text-white mb-4">${fa.info}<br>${fa.dec}</p>
 	 <!--progress-->
 	<div class="progress">
-	<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-	 aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 90%"></div>
+	<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" id="progress"
+	 aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: ${fa.prog + 40}%"></div>
 	</div>
 	</div>`)
-			;
-		};}
-	};
+						;
+				};
+			}
+		};
 
-});}
+	});
+}
+	$( function() {
+			$( "#sortable" ).sortable();
+			$( "#sortable" ).disableSelection();
+		  } );
